@@ -14,7 +14,7 @@ public class Game {
 		for (int i = 0; i < numOfPlayers; i++) {
 			System.out.println("Player please enter your name."); // Would like to add player number
 			String name = System.console().readLine();
-			Player player = new Player(name);
+			Player player = new Human(name);
 			player.setHand(unoDeck.drawCards(7));
 			playerList.add(player);
 		}
@@ -22,26 +22,28 @@ public class Game {
 
 	public void runGame() {
 		boolean isWinner = false;
-		int numOfPlayers = playerList.size();
 		int turn = 0;
 		int turnMod = 1;
 		while (!isWinner) {
 				Player currentPlayer = playerList.get(turn);
 				
-				System.out.printf("\nThe card on top is %s\nIt is %s's turn\\n\\n", topCard.toString(), currentPlayer.getName());
+				System.out.printf("\nThe card on top is %s\nIt is %s's turn\n\n", this.topCard.toString(), currentPlayer.getName());
 				
 				Card playedCard;
 				
-				if (currentPlayer.playable(topCard).size() == 0) {
-					System.out.printf("%s didn't have a card they could play...", currentPlayer.getName());
+				if (currentPlayer.playable(this.topCard).size() == 0) {
+					System.out.printf("%s didn't have a card they could play...\n", currentPlayer.getName());
 					
 					ArrayList<Card> addedCards = new ArrayList<Card>();
 					boolean isValidCard = false;
 					
 					while(!isValidCard) {
 						Card drawedCard = this.unoDeck.drawOne();
-						isValidCard = drawedCard.canPlayOn(topCard);
+						addedCards.add(drawedCard);
+						isValidCard = drawedCard.canPlayOn(this.topCard);
 					}
+					
+					System.out.println(addedCards);
 					
 					playedCard = addedCards.remove(addedCards.size()-1);
 					ArrayList<Card> newHand = new ArrayList<Card>();
@@ -51,13 +53,14 @@ public class Game {
 					
 					System.out.printf("%s drew %d cards!\n", currentPlayer.getName(), addedCards.size() + 1);
 				} else {
-					playedCard = currentPlayer.playCard(topCard);
+					playedCard = currentPlayer.playFromHand(this.topCard);
 				}
 				
 				System.out.printf("%s played a %s\n", currentPlayer.getName(), playedCard.toString());
 				
 
-				turn = turn + turnMod % playerList.size();
+				this.topCard = playedCard;
+				turn = (turn + turnMod) % playerList.size();
 		}
 
 	}
