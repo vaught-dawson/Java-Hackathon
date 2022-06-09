@@ -14,7 +14,7 @@ public class Bot extends Player{
 		Random rand = new Random();
 		int index = rand.nextInt(playableCards.size());
 		
-		return this.currentHand.remove(index);
+		return this.playCard(this.currentHand.get(index));
 	}
 	
 	public String chooseColor() {
