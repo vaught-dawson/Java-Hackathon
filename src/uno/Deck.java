@@ -68,6 +68,10 @@ public class Deck {
 		return cards;
 	}
 	
+	public void addToDiscard(Card card) {
+		this.discarded.add(card);
+	}
+	
 	private void shuffleCards() {
 		ArrayList<Card> shuffled = new ArrayList<Card>();
 		Random rand = new Random();

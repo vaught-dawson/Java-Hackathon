@@ -10,17 +10,23 @@ public class TestDeck {
 		
 		ArrayList<Card> cards = myDeck.getCards();
 
-		for (Card card : cards) {
-			card.showCard();
-		}
+//		for (Card card : cards) {
+//			card.showCard();
+//		}
 		
 		System.out.printf("Deck has %d cards\n", cards.size());
+		
+		Card topCard = myDeck.drawOne();
+		topCard.showCard();
 		
 		for (int i = 0; i < 8; i++) {
-			myDeck.drawOne().showCard();
+			Card card = myDeck.drawOne();
+			card.showCard();
+			System.out.println(card.canPlayOn(topCard));
 		}
 		
 		System.out.printf("Deck has %d cards\n", cards.size());
+		System.out.println();
 		
 	}
 
