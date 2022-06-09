@@ -27,7 +27,7 @@ public class Human extends Player {
 			}
 		} while (input < 0 || input > playableCards.size());
 
-		return this.currentHand.remove(input);
+		return this.playCard(playableCards.get(input));
 	}
 
 	public String chooseColor() {

@@ -38,9 +38,9 @@ public class Player {
 		return playableCard;
 	}
 	
-	public void playCard(Card card){
+	public Card playCard(Card card){
 		int idx = this.currentHand.indexOf(card);
-		this.currentHand.remove(idx);
+		return this.currentHand.remove(idx);
 	}
 	
 	public Card playFromHand(Card topCard) {
