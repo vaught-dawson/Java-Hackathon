@@ -2,7 +2,7 @@ package uno;
 import java.util.*;
 
 public class Player {
-	private ArrayList<Card> currentHand;
+	protected ArrayList<Card> currentHand;
 	private String name;
 	
 	
@@ -43,6 +43,7 @@ public class Player {
 		this.currentHand.remove(idx);
 	}
 	
-	
-	
+	public Card playFromHand(Card topCard) {
+		return null;
+	}
 }

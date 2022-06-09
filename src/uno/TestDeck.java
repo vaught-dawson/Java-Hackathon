@@ -1,32 +1,18 @@
 package uno;
 
-import java.util.ArrayList;
-
 public class TestDeck {
 
 	public static void main(String[] args) {
 
 		Deck myDeck = new Deck();
+		Card top = myDeck.drawOne();
+		System.out.println("Top: " + top.toString());
 		
-		ArrayList<Card> cards = myDeck.getCards();
-
-//		for (Card card : cards) {
-//			card.showCard();
-//		}
+		Human testSubject = new Human("Dave");
 		
-		System.out.printf("Deck has %d cards\n", cards.size());
+		testSubject.setHand(myDeck.drawCards(7));
+		System.out.println(testSubject.playFromHand(top));
 		
-		Card topCard = myDeck.drawOne();
-		topCard.showCard();
-		
-		for (int i = 0; i < 8; i++) {
-			Card card = myDeck.drawOne();
-			card.showCard();
-			System.out.println(card.canPlayOn(topCard));
-		}
-		
-		System.out.printf("Deck has %d cards\n", cards.size());
-		System.out.println();
 		
 	}
 
