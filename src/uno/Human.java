@@ -9,9 +9,7 @@ public class Human extends Player {
 
 	@Override
 	public Card playFromHand(Card topCard) {
-		System.out.println("HEre1 ");
 		ArrayList<Card> playableCards = this.playable(topCard);
-		System.out.println("HEre1 ");
 
 		System.out.println("Playable Cards:");
 		for (int i = 0; i < playableCards.size(); i++) {

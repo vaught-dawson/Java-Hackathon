@@ -46,4 +46,8 @@ public class Player {
 	public Card playFromHand(Card topCard) {
 		return null;
 	}
+	
+	public String chooseColor() {
+		return null;
+	}
 }

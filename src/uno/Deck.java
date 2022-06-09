@@ -10,6 +10,7 @@ public class Deck {
 
 	public Deck() {
 		this.cards = new ArrayList<Card>();
+		this.discarded = new ArrayList<Card>();
 
 		for (String color : new String[] { "Red", "Yellow", "Green", "Blue" }) {
 			cards.add(new Card(color, 0));

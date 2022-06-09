@@ -11,13 +11,23 @@ public class Game {
 		this.playerList = new ArrayList<Player>();
 		this.unoDeck = new Deck();
 		this.topCard = unoDeck.drawOne();
-		for (int i = 0; i < numOfPlayers; i++) {
-			System.out.println("Player please enter your name."); // Would like to add player number
-			String name = System.console().readLine();
-			Player player = new Human(name);
-			player.setHand(unoDeck.drawCards(7));
-			playerList.add(player);
-		}
+//		for (int i = 0; i < numOfPlayers; i++) {
+//			System.out.println("Player please enter your name."); // Would like to add player number
+//			String name = System.console().readLine();
+//			Player player = new Human(name);
+//			player.setHand(unoDeck.drawCards(7));
+//			playerList.add(player);
+//		}
+		
+		System.out.println("Player please enter your name."); // Would like to add player number
+		String name = System.console().readLine();
+		Human player = new Human(name);
+		player.setHand(unoDeck.drawCards(7));
+		playerList.add(player);
+		
+		Bot bot = new Bot("Player 2");
+		bot.setHand(unoDeck.drawCards(7));
+		playerList.add(bot);
 	}
 
 	public void runGame() {
@@ -42,9 +52,7 @@ public class Game {
 						addedCards.add(drawedCard);
 						isValidCard = drawedCard.canPlayOn(this.topCard);
 					}
-					
-					System.out.println(addedCards);
-					
+										
 					playedCard = addedCards.remove(addedCards.size()-1);
 					ArrayList<Card> newHand = new ArrayList<Card>();
 					newHand.addAll(addedCards);
@@ -53,14 +61,62 @@ public class Game {
 					
 					System.out.printf("%s drew %d cards!\n", currentPlayer.getName(), addedCards.size() + 1);
 				} else {
+					
 					playedCard = currentPlayer.playFromHand(this.topCard);
+					
+					if (currentPlayer.getHand().size() == 0) {
+						isWinner = true;
+					}
+					
 				}
 				
-				System.out.printf("%s played a %s\n", currentPlayer.getName(), playedCard.toString());
+				System.out.printf("%s played a %s, they have %d cards remaining!\n", currentPlayer.getName(), playedCard.toString(), currentPlayer.getHand().size());
 				
-
+				if (playedCard.getNumber() == 13) {
+					
+					playedCard.setColor(currentPlayer.chooseColor());
+					
+				} else if (playedCard.getNumber() == 14) {
+					
+					playedCard.setColor(currentPlayer.chooseColor());
+					turn = Math.abs((turn + turnMod) % playerList.size());
+					Player target = playerList.get(turn);
+					ArrayList<Card> newCards = new ArrayList<Card>();
+					newCards.addAll(this.unoDeck.drawCards(4));
+					newCards.addAll(target.getHand());
+					
+					target.setHand(newCards);
+					
+					System.out.printf("%s drew 4 cards.", target.getName());
+					
+				} else if (playedCard.getNumber() == 10) {
+					
+					turn = Math.abs((turn + turnMod) % playerList.size());
+					
+				} else if(playedCard.getNumber() == 11) {
+					
+					turnMod *= -1;
+					
+				} else if (playedCard.getNumber() == 12) {
+					
+					turn = Math.abs((turn + turnMod) % playerList.size());
+					Player target = playerList.get(turn);
+					ArrayList<Card> newCards = new ArrayList<Card>();
+					newCards.addAll(this.unoDeck.drawCards(2));
+					newCards.addAll(target.getHand());
+					
+					target.setHand(newCards);
+					
+					System.out.printf("%s drew 2 cards.", target.getName());
+				}
+				
+				
+				if (isWinner) {
+					System.out.printf("\n\n%s won the game!", currentPlayer.getName());
+				}
+				
 				this.topCard = playedCard;
-				turn = (turn + turnMod) % playerList.size();
+				turn = Math.abs((turn + turnMod) % playerList.size());
 		}
 
 	}
