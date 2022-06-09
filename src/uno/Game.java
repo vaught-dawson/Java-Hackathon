@@ -7,7 +7,7 @@ public class Game {
 	public Deck unoDeck;
 	public Card topCard;
 
-	public Game(int numOfPlayers) {
+	public Game (int numOfPlayers) {
 		this.unoDeck = new Deck();
 		this.topCard = unoDeck.drawOne();
 		int i = 0;
