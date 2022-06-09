@@ -30,8 +30,8 @@ public class Deck {
 		}
 		
 		for (int i = 0; i < 4; i++) {
-			cards.add(new Card(null, 13));				
-			cards.add(new Card(null, 14));				
+			cards.add(new Card("", 13));				
+			cards.add(new Card("", 14));				
 		}
 		
 		this.shuffleCards();
