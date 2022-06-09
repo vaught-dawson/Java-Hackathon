@@ -95,6 +95,9 @@ public class Deck {
 		while (this.discarded.size() > 0) {
 			int index = rand.nextInt(discarded.size());
 			this.cards.add(this.discarded.remove(index));
+			Card card = this.cards.get(this.cards.size());
+			if (card.getNumber() == 13 || card.getNumber() == 14)
+				card.setColor("");
 		}
 
 	}

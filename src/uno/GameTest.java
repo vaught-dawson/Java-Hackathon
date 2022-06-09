@@ -3,8 +3,8 @@ package uno;
 public class GameTest {
 
 	public static void main(String[] args) {
-		boolean valid = false;
-		while(!valid) {
+		boolean gameOver = false;
+		while(!gameOver) {
 			System.out.println("Please enter the number of players:");
 			String numOfPlayers = System.console().readLine();
 			if(isParsable(numOfPlayers)) {
