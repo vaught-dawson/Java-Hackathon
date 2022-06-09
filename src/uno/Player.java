@@ -2,7 +2,7 @@ package uno;
 import java.util.*;
 
 public class Player {
-	private ArrayList<Card> currentHand;
+	protected ArrayList<Card> currentHand;
 	private String name;
 	
 	
@@ -38,11 +38,12 @@ public class Player {
 		return playableCard;
 	}
 	
-	public void playCard(Card card){
+	public Card playCard(Card card){
 		int idx = this.currentHand.indexOf(card);
-		this.currentHand.remove(idx);
+		return this.currentHand.remove(idx);
 	}
 	
-	
-	
+	public Card playFromHand(Card topCard) {
+		return null;
+	}
 }

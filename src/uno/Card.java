@@ -27,8 +27,9 @@ public class Card {
 		}
 	}
 
-	public void showCard() {
-		System.out.printf("%s %s\n", this.name, this.color);
+	@Override
+	public String toString() {
+		return String.format("%s %s", this.name, this.color);
 	}
 
 	public String getColor() {
@@ -54,9 +55,9 @@ public class Card {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public boolean canPlayOn(Card card) {
-		if (card.getNumber() == this.number || card.getColor().equals(this.color)) {
+		if (card.getNumber() == this.number || card.getColor().equals(this.color) || this.color.equals("")) {
 			return true;
 		}
 		return false;
