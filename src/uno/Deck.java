@@ -45,6 +45,29 @@ public class Deck {
 		this.cards = cards;
 	}
 	
+	public Card drawOne() {
+		Card drawedCard;;
+		try {
+			drawedCard = this.cards.remove(0);
+		} catch (IndexOutOfBoundsException e){
+			this.refreshDeck();
+			return this.drawOne();
+		}
+		
+		if (drawedCard == null) return null;
+		return drawedCard;
+	}
+	
+	public ArrayList<Card> drawCards(int num) {
+		ArrayList<Card> cards = new ArrayList<Card>();
+		
+		for (int i = 0; i < num; i++) {
+			cards.add(this.drawOne());
+		}
+		
+		return cards;
+	}
+	
 	private void shuffleCards() {
 		ArrayList<Card> shuffled = new ArrayList<Card>();
 		Random rand = new Random();
@@ -57,6 +80,15 @@ public class Deck {
 		this.cards = shuffled;
 	}
 	
-	//TODO Add discarded cards back to deck and shuffle
-	private void refreshDeck() {}
+	private void refreshDeck() {
+		if (this.discarded.size() == 0) System.out.println("Out of cards!");
+		
+		Random rand = new Random();
+		
+		while (this.discarded.size() > 0) {
+			int index = rand.nextInt(discarded.size());
+			this.cards.add(this.discarded.remove(index));
+		}
+		
+	}
 }
